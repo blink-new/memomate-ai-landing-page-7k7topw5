@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Futuristic Dark Theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 0 100% 50%;
+    --radius: 0.5rem;
+    
+    /* Custom MemoMate Variables */
+    --neural-red: 0 100% 50%;
+    --neural-red-glow: 0 100% 60%;
+    --neural-dark: 0 0% 5%;
+    --neural-darker: 0 0% 2%;
+    --neural-grid: 0 0% 8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-black text-foreground font-rajdhani;
+
+    background: radial-gradient(ellipse at center, hsl(0deg 0% 2%) 0%, hsl(0deg 0% 0%) 100%);
+    overflow-x: hidden;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .neural-glow {
+    box-shadow: 0 0 20px hsl(var(--neural-red) / 30%),
+                0 0 40px hsl(var(--neural-red) / 20%),
+                0 0 60px hsl(var(--neural-red) / 10%);
+  }
+  
+  .neural-text-glow {
+    text-shadow: 0 0 10px hsl(var(--neural-red) / 50%),
+                 0 0 20px hsl(var(--neural-red) / 30%),
+                 0 0 30px hsl(var(--neural-red) / 20%);
+  }
+  
+  .neural-border {
+    border: 1px solid hsl(var(--neural-red) / 30%);
+    box-shadow: inset 0 0 20px hsl(var(--neural-red) / 10%);
+  }
+  
+  .neural-grid-bg {
+    background-image: 
+      linear-gradient(hsl(var(--neural-red) / 10%) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--neural-red) / 10%) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-pulse 4s ease-in-out infinite;
+  }
+  
+  .particle-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .floating-cube {
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .neural-pulse {
+    animation: neural-pulse 2s ease-in-out infinite;
+  }
+  
+  .glitch-text {
+    position: relative;
+  }
+  
+  .glitch-text:hover::before,
+  .glitch-text:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .glitch-text:hover::before {
+    animation: glitch-1 0.3s infinite;
+    color: hsl(var(--neural-red));
+    z-index: -1;
+  }
+  
+  .glitch-text:hover::after {
+    animation: glitch-2 0.3s infinite;
+    color: hsl(var(--neural-red) / 50%);
+    z-index: -2;
+  }
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 30%; }
+  50% { opacity: 60%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  33% { transform: translateY(-10px) rotateX(5deg) rotateY(5deg); }
+  66% { transform: translateY(5px) rotateX(-5deg) rotateY(-5deg); }
+}
+
+@keyframes neural-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px hsl(var(--neural-red) / 30%);
+    transform: scale(1);
+  }
+
+  50% { 
+    box-shadow: 0 0 40px hsl(var(--neural-red) / 60%);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glitch-1 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes glitch-2 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(2px); }
+  40% { transform: translateX(-2px); }
+  60% { transform: translateX(2px); }
+  80% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--neural-darker));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--neural-red) / 50%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--neural-red) / 80%);
+}
+
+/* Additional 3D and Animation Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-y-0 {
+  transform: rotateY(0deg);
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Text utilities for better overflow handling */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Improved animation performance */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Better spacing utilities */
+.space-y-safe > * + * {
+  margin-top: clamp(0.5rem, 2vw, 2rem);
+}
+
+.space-x-safe > * + * {
+  margin-left: clamp(0.5rem, 2vw, 2rem);
+}
+
+/* Prevent layout shifts */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
